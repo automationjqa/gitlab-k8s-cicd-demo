@@ -5,7 +5,7 @@ services:
 variables:
   SPRING_PROFILES_ACTIVE: gitlab-ci
   DOCKER_DRIVER: overlay2
-  CI_REGISTRY_IMAGE: ${REGISTRY_HOST}:${REGISTRY_PORT}${DOCKER_IMAGE_PATH}:${CI_COMMIT_REF_NAME}-${CI_PIPELINE_ID}
+  CI_REGISTRY_IMAGE: ${REGISTRY_HOST}:${REGISTRY_PORT}/root/${CI_PROJECT_NAME}/hwservice:${CI_COMMIT_REF_NAME}-${CI_PIPELINE_ID}
 
 cache:
   paths:
@@ -30,7 +30,7 @@ test_variable:
     - echo $K8S_TOKEN
     - echo $REGISTRY_HOST
     - echo $REGISTRY_PORT
-    - echo $DOCKER_IMAGE_PATH
+    - echo $CI_PROJECT_NAME
 
 hw-service-build:
   image: maven:3.6.3-jdk-13
