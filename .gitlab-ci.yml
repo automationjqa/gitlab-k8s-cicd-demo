@@ -104,7 +104,7 @@ deploy-service:
         kubectl set image deployment hwservice hwservice=${CI_REGISTRY_IMAGE} -n ${CI_COMMIT_REF_NAME}
         echo "HW Service Deployment Compleated, version:" ${CI_REGISTRY_IMAGE}
         kubectl apply -f topology/ingress.yaml
-        echo "Application is available by ${K8S_SERVER}/$CI_REGISTRY_IMAGE"
+        echo "Application is available by the context: /helloworld"
 
   only:
     changes:
