@@ -82,9 +82,9 @@ deploy-topology:
       kubectl config set-credentials gitlab --token="${K8S_TOKEN}";
       kubectl config set-context default --cluster=k8s --user=gitlab;
       kubectl config use-context default;
-      sed -i "s/BRANCH_NAME/$CI_COMMIT_REF_NAME/g" topology/*.yaml;
-      kubectl apply -f topology/namespace.yaml;
-      kubectl apply -f topology/hwservice.yaml;
+      sed -i "s/BRANCH_NAME/$CI_COMMIT_REF_NAME/g" topology/*.yml;
+      kubectl apply -f topology/namespace.yml;
+      kubectl apply -f topology/hwservice.yml;
   only:
     changes:
       - topology/**/*
@@ -103,7 +103,7 @@ deploy-service:
         kubectl config use-context default
         kubectl set image deployment hwservice hwservice=${CI_REGISTRY_IMAGE} -n ${CI_COMMIT_REF_NAME}
         echo "HW Service Deployment Compleated, version:" ${CI_REGISTRY_IMAGE}
-        kubectl apply -f topology/ingress.yaml
+        kubectl apply -f topology/ingress.yml
         echo "Application is available by the context: /helloworld"
 
   only:
