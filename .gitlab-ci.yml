@@ -29,11 +29,11 @@ test_variable:
     - echo $CI_REGISTRY_PASSWORD
     - echo $CI_REGISTRY_USER
     - echo $CI_REGISTRY
-    - echo $CI_PROJECT_NAME
+    - echo $CI_PROJECT_NAME   
 
 hw-service-build:
   image: maven:3.6.3-jdk-13
-  stage: build
+  stage: build 
   script: |-
         cd service
         mvn package -B -X
@@ -48,14 +48,14 @@ hw-service-build:
       
 hw-service-test:
   image: maven:3-jdk-8
-  stage: test
+  stage: test  
   script: "echo TEST OK"
   only:
     changes:
       - service/**/*
 
 hw-service-package:
-  stage: package
+  stage: package  
   image: docker:dind
   needs: ["hw-service-build"]
   services:
@@ -91,7 +91,7 @@ deploy-topology:
 
 deploy-service:
   image: google/cloud-sdk
-  stage: deploy-version
+  stage: deploy-version  
   script: |-
         echo "Deploying HW Service"
         echo "Executed in runnner:" $(hostname)
@@ -108,4 +108,3 @@ deploy-service:
   only:
     changes:
       - service/**/*
-  
